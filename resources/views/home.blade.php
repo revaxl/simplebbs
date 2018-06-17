@@ -5,6 +5,7 @@
         <div class="container">
             <h1 class="display-3">Hello, world!</h1>
             <p>This is a simple Bulletin Board System.</p>
+            @auth
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <p><a class="btn btn-primary btn-lg" href="{{ route('login') }}" role="button">Login</a></p>
@@ -13,6 +14,7 @@
                     <p><a class="btn btn-primary btn-lg" href="{{ route('register') }}" role="button">Register</a></p>
                 </div>
             </div>
+            @endauth
         </div>
     </div>
 

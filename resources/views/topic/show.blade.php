@@ -1,20 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('topics.index') }}" class="btn btn-primary">Go back</a>
+    <a href="{{ route('topics.index') }}" class="btn btn-info">Go back</a>
     <h1>{{ $topic->title }}</h1>
     <p>{{ $topic->content }}</p>
 
     <hr>
     @auth
         @if(Auth::user()->id == $topic->user_id)
-            <a href="{{ route('topics.edit', ['id' => $topic->id]) }}">edit</a>
-            {!!Form::open(['action' => ['TopicController@destroy', $topic->id], 'method' => 'POST'])!!}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-            {!!Form::close()!!}
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="{{ route('topics.edit', ['id' => $topic->id]) }}" class="btn btn-warning">edit</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    {!!Form::open(['action' => ['TopicController@destroy', $topic->id], 'method' => 'POST'])!!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                    {!!Form::close()!!}
+                </div>
+            </div>
         @endif
-
+        <br>
         <div>
         {!!Form::open(['action' => ['CommentController@store'], 'method' => 'POST'])!!}
             <div class="form-group">
@@ -53,10 +59,6 @@
                         <p class="card-text"> {{ $comment->content }}</p>
                     </div>
                 </div>
-
-            @empty
-            no comments
-
             @endforelse
         </div>
 @endsection
