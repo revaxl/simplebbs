@@ -69,7 +69,8 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $topic = Topic::find($id);
+        return view('topic.edit')->with('topic', $topic);
     }
 
     /**
@@ -81,7 +82,17 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $topic = Topic::find($id);
+        $topic->title = $request->input('title');
+        $topic->content = $request->input('content');
+        $topic->save();
+
+        return redirect(route('topics.edit', ['id' => $topic->id]));
     }
 
     /**
@@ -92,6 +103,8 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic->delete();
+        return redirect(route('topics.index'));
     }
 }
