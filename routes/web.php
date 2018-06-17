@@ -12,9 +12,11 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::resource('/topics', 'TopicController');
 Auth::routes();
 
 Route::post('/comment', 'CommentController@store');
 Route::delete('/comment/{id}/delete', 'CommentController@destroy');
+

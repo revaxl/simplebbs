@@ -21,6 +21,8 @@ class HomeController extends Controller
     }
 
     public function profile() {
-        return view('auth.profile');
+        $topics = auth()->user()->topics;
+        $comments = auth()->user()->comments;
+        return view('auth.profile')->with('topics', $topics)->with('comments', $comments);
     }
 }
