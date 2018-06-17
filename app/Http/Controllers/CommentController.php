@@ -8,15 +8,6 @@ use App\Comment;
 
 class CommentController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', ['except', 'index']);
-    }
 
     /**
      * Display a listing of the resource.
@@ -102,6 +93,9 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        return back();
     }
 }

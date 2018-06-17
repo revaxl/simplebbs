@@ -17,3 +17,4 @@ Route::resource('/topics', 'TopicController');
 Auth::routes();
 
 Route::post('/comment', 'CommentController@store');
+Route::delete('/comment/{id}/delete', 'CommentController@destroy');

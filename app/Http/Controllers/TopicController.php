@@ -15,7 +15,7 @@ class TopicController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'index', 'show']);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -120,6 +120,6 @@ class TopicController extends Controller
         $topic = Topic::find($id);
         $topic->delete();
         toast('Topic Deleted Successfully','success','top-right');
-        return redirect(route('topics.index'));
+        return back();
     }
 }
