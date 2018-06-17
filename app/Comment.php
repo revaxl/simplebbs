@@ -3,18 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
-use App\Topic;
 
 class Comment extends Model
 {
 
     public function user() {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\User');
     }
 
     public function topic() {
-        return $this->belongsTo('Topic');
+        return $this->belongsTo('App\Topic');
     }
 
 }

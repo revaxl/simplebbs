@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Topic;
 use Illuminate\Http\Request;
+use App\Comment;
 
 class CommentController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except', 'index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +25,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -34,7 +46,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'content' => 'required',
+            'topic_id' => 'required',
+        ]);
+
+        $comment = new Comment();
+        $comment->content = $request->input('content');
+        $comment->topic_id = (int) $request->input('topic_id');
+        $comment->user_id = auth()->user()->id;
+        $comment->save();
+
+        return back();
     }
 
     /**

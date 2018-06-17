@@ -10,4 +10,20 @@
         {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
     {!!Form::close()!!}
     <hr>
+    {!!Form::open(['action' => ['CommentController@store'], 'method' => 'POST'])!!}
+        {{Form::textarea('content', '')}}
+        {{ Form::hidden('topic_id', $topic->id) }}
+        {{Form::submit('add comment', ['class' => 'btn btn-primary'])}}
+    {!!Form::close()!!}
+
+    <ul class="list-group">
+    @forelse($topic->comments as $comment)
+        <li class="list-group-item">
+        <b> {{ $comment->user->name }}: </b>
+            {{ $comment->content }}
+        </li>
+    @empty
+    no comments
+    @endforelse
+    </ul>
 @endsection

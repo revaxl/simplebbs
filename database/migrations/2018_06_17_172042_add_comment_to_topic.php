@@ -13,8 +13,8 @@ class AddCommentToTopic extends Migration
      */
     public function up()
     {
-        Schema::table('topics', function($table) {
-           $table->integer('comment_id')->nullable();
+        Schema::table('comments', function($table) {
+           $table->integer('topic_id')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddCommentToTopic extends Migration
      */
     public function down()
     {
-        Schem::table('topics', function($table) {
-            $table->dropColumn('comment_id');
+        Schema::table('comments', function($table) {
+            $table->dropColumn('topic_id');
         });
     }
 }
