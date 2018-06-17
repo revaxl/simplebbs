@@ -7,6 +7,17 @@ use App\Topic;
 
 class TopicController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,8 +55,10 @@ class TopicController extends Controller
         $topic = new Topic();
         $topic->title = $request->input('title');
         $topic->content = $request->input('content');
+        $topic->user_id = auth()->user()->id;
         $topic->save();
 
+        toast('Topic Added Successfully','success','top-right');
         return redirect(route('topics.index'));
     }
 
@@ -92,7 +105,8 @@ class TopicController extends Controller
         $topic->content = $request->input('content');
         $topic->save();
 
-        return redirect(route('topics.edit', ['id' => $topic->id]));
+        toast('Topic Updated Successfully','success','top-right');
+        return redirect(route('topics.show', ['id' => $topic->id]));
     }
 
     /**
@@ -105,6 +119,7 @@ class TopicController extends Controller
     {
         $topic = Topic::find($id);
         $topic->delete();
+        toast('Topic Deleted Successfully','success','top-right');
         return redirect(route('topics.index'));
     }
 }
