@@ -59,6 +59,8 @@
                         <p class="card-text"> {{ $comment->content }}</p>
                     </div>
                 </div>
+			@empty
+				<p> no comments! </p>
             @endforelse
         </div>
 @endsection
