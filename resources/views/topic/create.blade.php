@@ -2,7 +2,8 @@
 
 @section('content')
     <h1>Add new Topic</h1>
-
+	@include('inc.errors')
+	
     {!! Form::open(['action' => 'TopicController@store', 'method' => 'POST']) !!}
         <div class="form-group">
             {{ Form::label('title', 'post title') }}
