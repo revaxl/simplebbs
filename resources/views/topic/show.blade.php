@@ -44,7 +44,7 @@
                         <div class="d-flex flex-row bd-highlight">
                             <div class="p-1 flex-grow-1"><b> {{ $comment->user->name }}: </b></div>
                             @auth
-                                @if(Auth::user()->id == $topic->user_id)
+                                @if(Auth::user()->id == $comment->user_id)
                                     <div class="p-1">
                                         {!!Form::open(['action' => ['CommentController@destroy', $comment->id], 'method' => 'POST'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
